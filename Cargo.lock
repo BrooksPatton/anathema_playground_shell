@@ -4,8 +4,9 @@ version = 4
 
 [[package]]
 name = "anathema"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a63b9e17c801c8ca2c8b30f7f0357eea2262535d66f15ac5718354cd65b94f8"
 dependencies = [
  "anathema-backend",
  "anathema-default-widgets",
@@ -21,8 +22,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-backend"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03c113d9ce9f57daea87a4b254170925bbfa194b5c0cdb4c8f35372fb6f0eca4"
 dependencies = [
  "anathema-geometry",
  "anathema-state",
@@ -37,8 +39,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-default-widgets"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c005d492ffae4b5687d262847e7c0639693886149d8c3a65ca51618ad2bcd60b"
 dependencies = [
  "anathema-backend",
  "anathema-geometry",
@@ -53,13 +56,15 @@ dependencies = [
 
 [[package]]
 name = "anathema-geometry"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3eba3089166d9470826c80f242406e7b032a1ca56ad17e3def23c314de3e381"
 
 [[package]]
 name = "anathema-runtime"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c1a84d504b93adc0785be8b04410c15ea1836fcb5675b3c03f9c0d986cce3d2"
 dependencies = [
  "anathema-backend",
  "anathema-default-widgets",
@@ -75,8 +80,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-state"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6795b5b1cddebcb3ae14ad9e796b264d5e32bb841fd192cde84ca5af4f508d97"
 dependencies = [
  "anathema-state-derive",
  "anathema-store",
@@ -84,8 +90,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-state-derive"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c14b4fe71f490a7150f8a67368bb77d7f315ce5ed461ca22b8c26cac16044a45"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -94,13 +101,15 @@ dependencies = [
 
 [[package]]
 name = "anathema-store"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c7befa383690a0914e6595b192165ef1180595a8ac47b8bb2cd6657283445ff0"
 
 [[package]]
 name = "anathema-templates"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fbf44b805c7a6feb42a1594d1d5adb54d30b186965a299893fdf0508fe730ee7"
 dependencies = [
  "anathema-state",
  "anathema-store",
@@ -108,8 +117,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-value-resolver"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d23da867810464d8322b17d9db52e23bf0b7d947c73c5bb45a23969a50fe7e0e"
 dependencies = [
  "anathema-state",
  "anathema-store",
@@ -119,8 +129,9 @@ dependencies = [
 
 [[package]]
 name = "anathema-widgets"
-version = "0.2.12-beta"
-source = "git+https://github.com/togglebyte/anathema/#1ac300eef04fc5e61d41014be53837751777f6be"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1a1612840b3c1f1263646dcbaaebfea727b2f172e3c12defce008a29749af006"
 dependencies = [
  "anathema-geometry",
  "anathema-state",
