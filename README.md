@@ -9,10 +9,9 @@
 - [x] Can delete input
 - [x] Implement a scrollback buffer
 - [x] Handle invalid commands
-- [ ] Implement a REPL
-- [ ] Implement exit
-- [ ] Implement echo
-- [ ] Implement type
+- [x] Implement exit
+- [x] Implement echo
+- [x] Implement type
 - [ ] Locate executable files
 - [ ] Run a program
 

@@ -8,6 +8,7 @@ use crate::components::command_prompt::{CommandPrompt, CommandPromptState};
 use crate::components::scrollback_buffer::{ScrollbackBuffer, ScrollbackBufferState};
 use crate::components::shell::{Shell, ShellState};
 
+mod builtins;
 mod components;
 mod logic;
 

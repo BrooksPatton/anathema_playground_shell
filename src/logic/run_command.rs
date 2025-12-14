@@ -1,12 +1,17 @@
 use std::fmt::Display;
 
-use crate::logic::parse_command_prompt::ParsedCommandPrompt;
+use crate::{
+    builtins::{
+        Builtin, builtin_echo::builtin_echo, builtin_exit::builtin_exit, builtin_type::builtin_type,
+    },
+    components::shell::ShellState,
+    logic::parse_command_prompt::ParsedCommandPrompt,
+};
 
 #[derive(Debug)]
 pub struct CommandOutput {
     pub standard_out: Option<String>,
     pub standard_error: Option<RunCommandError>,
-    pub exit_code: u32,
 }
 
 #[derive(Debug)]
@@ -26,26 +31,38 @@ impl Display for RunCommandError {
     }
 }
 
-pub fn run_command(command: ParsedCommandPrompt) -> CommandOutput {
+pub fn run_command(
+    command: ParsedCommandPrompt,
+    context: &mut anathema::component::Context<'_, '_, ShellState>,
+) -> CommandOutput {
     let Some(command_name) = command.command_name.clone() else {
         if command.is_valid() {
             return CommandOutput {
                 standard_out: None,
                 standard_error: None,
-                exit_code: 0,
             };
         }
 
         return CommandOutput {
             standard_out: None,
             standard_error: Some(RunCommandError::MissingCommandName),
-            exit_code: 1,
         };
     };
 
+    match Builtin::from(&command_name) {
+        Builtin::Exit => {
+            builtin_exit(context);
+            unreachable!();
+        }
+        Builtin::Echo => builtin_echo(&command.arguments),
+        Builtin::Type => builtin_type(&command_name, &command.arguments),
+        Builtin::Notfound => run_external_command(command_name),
+    }
+}
+
+pub fn run_external_command(command_name: String) -> CommandOutput {
     CommandOutput {
         standard_out: None,
         standard_error: Some(RunCommandError::NotFound(command_name)),
-        exit_code: 1,
     }
 }

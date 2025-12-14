@@ -1,9 +1,8 @@
+use crate::logic::{parse_command_prompt::ParsedCommandPrompt, run_command::run_command};
 use anathema::{
     component::Component,
     state::{State, Value},
 };
-
-use crate::logic::{parse_command_prompt::ParsedCommandPrompt, run_command::run_command};
 
 #[derive(State, Default, Debug)]
 pub struct ShellState {
@@ -33,15 +32,15 @@ impl Component for Shell {
         &mut self,
         event: &mut anathema::component::UserEvent<'_>,
         state: &mut Self::State,
-        mut children: anathema::component::Children<'_, '_>,
+        mut _children: anathema::component::Children<'_, '_>,
         mut context: anathema::component::Context<'_, '_, Self::State>,
     ) {
         match event.name() {
             "command_entered" => {
                 let command_prompt = event.data::<String>().clone();
                 let ps1 = state.ps1.to_ref();
-                let parsed_command_prompt = ParsedCommandPrompt::new(&command_prompt);
-                let run_result = run_command(parsed_command_prompt);
+                let parsed_command_prompt = ParsedCommandPrompt::new(command_prompt.clone());
+                let run_result = run_command(parsed_command_prompt, &mut context);
 
                 if let Some(success_output) = run_result.standard_out {
                     context
