@@ -1,4 +1,1 @@
-vstack
-	spacer
-	@scrollback_buffer
-	@command_prompt
+@shell

@@ -6,21 +6,13 @@ use anathema::{
 #[derive(Default, Debug, State)]
 pub struct CommandPromptState {
     pub input: Value<String>,
-    pub ps1: Value<String>,
-    pub display_ps1: Value<bool>,
 }
 
 impl CommandPromptState {
     pub fn new() -> Self {
         let input = Value::new(String::new());
-        let ps1 = Value::new(String::from("$ "));
-        let display_ps1 = Value::new(true);
 
-        Self {
-            input,
-            ps1,
-            display_ps1,
-        }
+        Self { input }
     }
 }
 
@@ -45,21 +37,9 @@ impl Component for CommandPrompt {
             }
             KeyCode::Enter => {
                 let mut input = state.input.to_mut();
-                let display_ps1 = state.display_ps1.to_mut();
-                let ps1 = state.ps1.to_ref();
-                let command_prompt = format!(
-                    "{}{}",
-                    if display_ps1.as_bool().unwrap() {
-                        ps1.as_str()
-                    } else {
-                        ""
-                    },
-                    input.as_str()
-                );
-                context
-                    .components
-                    .by_name("scrollback_buffer")
-                    .send(command_prompt);
+                let command_prompt = format!("{}", input.as_str());
+
+                context.publish("command_entered", command_prompt);
                 input.clear();
             }
             _ => (),

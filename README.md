@@ -8,7 +8,7 @@
 - [x] Can type input
 - [x] Can delete input
 - [x] Implement a scrollback buffer
-- [ ] Handle invalid commands
+- [x] Handle invalid commands
 - [ ] Implement a REPL
 - [ ] Implement exit
 - [ ] Implement echo

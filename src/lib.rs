@@ -6,8 +6,10 @@ use std::fs::read_to_string;
 
 use crate::components::command_prompt::{CommandPrompt, CommandPromptState};
 use crate::components::scrollback_buffer::{ScrollbackBuffer, ScrollbackBufferState};
+use crate::components::shell::{Shell, ShellState};
 
 mod components;
+mod logic;
 
 pub fn run() {
     let template = read_to_string("templates/index.aml").unwrap();
@@ -35,11 +37,19 @@ pub fn run() {
         )
         .unwrap();
     builder
-        .component(
+        .prototype(
             "scrollback_buffer",
             "templates/scrollback_buffer.aml",
-            ScrollbackBuffer,
-            ScrollbackBufferState::new(),
+            || ScrollbackBuffer,
+            || ScrollbackBufferState::new(),
+        )
+        .unwrap();
+    builder
+        .prototype(
+            "shell",
+            "templates/shell.aml",
+            || Shell,
+            || ShellState::new(),
         )
         .unwrap();
 

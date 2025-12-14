@@ -1,4 +1,3 @@
 hstack
-	if state.display_ps1
-		text [foreground: state.focus_color] state.ps1
+	text [foreground: state.focus_color] attributes.ps1
 	text state.input

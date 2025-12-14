@@ -1,0 +1,4 @@
+vstack
+	spacer
+	@scrollback_buffer
+	@command_prompt (command_entered -> command_entered) [ps1: state.ps1]
