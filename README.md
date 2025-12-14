@@ -7,13 +7,13 @@
 - [x] Print a prompt
 - [x] Can type input
 - [x] Can delete input
-- [x] Implement a scrollback buffer
+- [x] Implement a scroll back buffer
 - [x] Handle invalid commands
 - [x] Implement exit
 - [x] Implement echo
 - [x] Implement type
-- [ ] Locate executable files
-- [ ] Run a program
+- [x] Locate executable files
+- [x] Run a program
 
 ### Navigation
 
@@ -50,7 +50,7 @@
 ### Pipelines
 
 - [ ] Dual-command pipeline
-- [ ] Pipelines with built-ins
+- [ ] Pipelines with builtins
 - [ ] Multi-command pipelines
 
 ### History

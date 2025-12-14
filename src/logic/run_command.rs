@@ -2,7 +2,8 @@ use std::fmt::Display;
 
 use crate::{
     builtins::{
-        Builtin, builtin_echo::builtin_echo, builtin_exit::builtin_exit, builtin_type::builtin_type,
+        Builtin, builtin_echo::builtin_echo, builtin_exit::builtin_exit,
+        builtin_type::builtin_type, run_executable::run_executable,
     },
     components::shell::ShellState,
     logic::parse_command_prompt::ParsedCommandPrompt,
@@ -18,6 +19,7 @@ pub struct CommandOutput {
 pub enum RunCommandError {
     NotFound(String),
     MissingCommandName,
+    UnknownError,
 }
 
 impl Display for RunCommandError {
@@ -25,6 +27,7 @@ impl Display for RunCommandError {
         let message = match self {
             Self::NotFound(command_name) => format!("{command_name}: command not found"),
             Self::MissingCommandName => format!("Error: a command name must be given"),
+            Self::UnknownError => format!("Something went wrong"),
         };
 
         write!(f, "{message}")
@@ -55,14 +58,7 @@ pub fn run_command(
             unreachable!();
         }
         Builtin::Echo => builtin_echo(&command.arguments),
-        Builtin::Type => builtin_type(&command_name, &command.arguments),
-        Builtin::Notfound => run_external_command(command_name),
-    }
-}
-
-pub fn run_external_command(command_name: String) -> CommandOutput {
-    CommandOutput {
-        standard_out: None,
-        standard_error: Some(RunCommandError::NotFound(command_name)),
+        Builtin::Type => builtin_type(&command.arguments),
+        Builtin::Notfound => run_executable(&command_name, &command.arguments),
     }
 }

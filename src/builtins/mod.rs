@@ -3,6 +3,7 @@ use std::fmt::Display;
 pub mod builtin_echo;
 pub mod builtin_exit;
 pub mod builtin_type;
+pub mod run_executable;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Builtin {

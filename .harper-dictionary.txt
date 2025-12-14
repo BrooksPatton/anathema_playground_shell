@@ -1,0 +1,4 @@
+builtins
+pwd
+stderr
+stdout
