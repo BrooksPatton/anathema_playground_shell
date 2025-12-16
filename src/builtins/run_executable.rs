@@ -2,7 +2,7 @@ use crate::logic::{
     find_executibles_in_path::find_first_executable_in_path_by_name,
     run_command::{CommandOutput, RunCommandError},
 };
-use std::process;
+use std::process::{self};
 
 pub fn run_executable(command_name: &str, arguments: &[String]) -> CommandOutput {
     if find_first_executable_in_path_by_name(command_name).is_none() {
