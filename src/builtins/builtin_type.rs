@@ -12,6 +12,7 @@ pub fn builtin_type(arguments: &[String]) -> CommandOutput {
 
     if !matches!(builtin, Builtin::Notfound) {
         return CommandOutput {
+            command_name: Some(format!("{}", Builtin::Type)),
             standard_out: Some(format!("{builtin} is a shell builtin")),
             standard_error: None,
         };
@@ -21,12 +22,14 @@ pub fn builtin_type(arguments: &[String]) -> CommandOutput {
         let path = executable.path();
 
         return CommandOutput {
+            command_name: Some(format!("{}", Builtin::Type)),
             standard_out: Some(format!("{argument} is {}", path.display())),
             standard_error: None,
         };
     }
 
     CommandOutput {
+        command_name: Some(format!("{}", Builtin::Type)),
         standard_out: None,
         standard_error: Some(RunCommandError::NotFound(argument)),
     }

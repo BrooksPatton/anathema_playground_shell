@@ -7,6 +7,7 @@ use std::process::{self};
 pub fn run_executable(command_name: &str, arguments: &[String]) -> CommandOutput {
     if find_first_executable_in_path_by_name(command_name).is_none() {
         return CommandOutput {
+            command_name: Some(command_name.to_owned()),
             standard_out: None,
             standard_error: Some(RunCommandError::NotFound(command_name.to_owned())),
         };
@@ -18,6 +19,7 @@ pub fn run_executable(command_name: &str, arguments: &[String]) -> CommandOutput
 
     let Ok(output) = command.output() else {
         return CommandOutput {
+            command_name: Some(command_name.to_owned()),
             standard_out: None,
             standard_error: Some(RunCommandError::UnknownError),
         };
@@ -27,6 +29,7 @@ pub fn run_executable(command_name: &str, arguments: &[String]) -> CommandOutput
         .map(|output| output.trim().to_owned());
 
     CommandOutput {
+        command_name: Some(command_name.to_owned()),
         standard_out,
         standard_error: None,
     }

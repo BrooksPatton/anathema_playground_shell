@@ -9,13 +9,15 @@ use crate::{
     logic::parse_command_prompt::ParsedCommandPrompt,
 };
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct CommandOutput {
+    #[allow(dead_code)]
+    pub command_name: Option<String>,
     pub standard_out: Option<String>,
     pub standard_error: Option<RunCommandError>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum RunCommandError {
     NotFound(String),
     MissingCommandName,
@@ -41,12 +43,14 @@ pub fn run_command(
     let Some(command_name) = command.command_name.clone() else {
         if command.is_valid() {
             return CommandOutput {
+                command_name: None,
                 standard_out: None,
                 standard_error: None,
             };
         }
 
         return CommandOutput {
+            command_name: None,
             standard_out: None,
             standard_error: Some(RunCommandError::MissingCommandName),
         };

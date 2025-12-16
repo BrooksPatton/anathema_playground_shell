@@ -1,12 +1,13 @@
-use anathema::backend::Backend;
-use anathema::backend::tui::TuiBackend;
-use anathema::runtime::Runtime;
-use anathema::templates::{Document, ToSourceKind};
-use std::fs::read_to_string;
-
 use crate::components::command_prompt::{CommandPrompt, CommandPromptState};
 use crate::components::scrollback_buffer::{ScrollbackBuffer, ScrollbackBufferState};
 use crate::components::shell::{Shell, ShellState};
+pub use crate::logic::run_command::CommandOutput as BBCommandOutput;
+use anathema::backend::Backend;
+use anathema::backend::tui::TuiBackend;
+use anathema::runtime::{Builder, Runtime};
+use anathema::templates::{Document, ToSourceKind};
+use std::fs::read_to_string;
+use std::path::Path;
 
 mod builtins;
 mod components;
@@ -56,5 +57,33 @@ pub fn run() {
 
     builder
         .finish(&mut backend, |runtime, backend| runtime.run(backend))
+        .unwrap();
+}
+
+pub fn register<'a>(builder: &mut Builder<()>, templates_path: &'static str) {
+    let path = Path::new(templates_path);
+    builder
+        .component(
+            "bb_command_prompt",
+            path.join("command_prompt.aml"),
+            CommandPrompt,
+            CommandPromptState::new(),
+        )
+        .unwrap();
+    builder
+        .prototype(
+            "bb_scrollback_buffer",
+            path.join("scrollback_buffer.aml"),
+            || ScrollbackBuffer,
+            || ScrollbackBufferState::new(),
+        )
+        .unwrap();
+    builder
+        .prototype(
+            "bb_shell",
+            path.join("shell.aml"),
+            || Shell,
+            || ShellState::new(),
+        )
         .unwrap();
 }

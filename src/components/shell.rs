@@ -42,23 +42,25 @@ impl Component for Shell {
                 let parsed_command_prompt = ParsedCommandPrompt::new(command_prompt.clone());
                 let run_result = run_command(parsed_command_prompt, &mut context);
 
+                context.publish("on_command", run_result.clone());
+
                 if let Some(success_output) = run_result.standard_out {
                     context
                         .components
-                        .by_name("scrollback_buffer")
+                        .by_name("bb_scrollback_buffer")
                         .send(success_output);
                 }
 
                 if let Some(error_output) = run_result.standard_error {
                     context
                         .components
-                        .by_name("scrollback_buffer")
+                        .by_name("bb_scrollback_buffer")
                         .send(error_output.to_string());
                 }
 
                 context
                     .components
-                    .by_name("scrollback_buffer")
+                    .by_name("bb_scrollback_buffer")
                     .send(format!("{}{command_prompt}", ps1.as_str()));
             }
             _ => (),
